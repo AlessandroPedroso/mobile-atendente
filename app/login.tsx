@@ -31,8 +31,8 @@ export default function Login() {
       await signIn(email, password);
       router.replace("/(authenticated)/dashboard");
     } catch (error) {
-      console.log(error);
-      Alert.alert("Erro", "Erro ao tentar fazer login.");
+      //console.log(error);
+      //Alert.alert("Erro", "Erro ao tentar fazer login.");
     } finally {
       setLoading(false);
     }

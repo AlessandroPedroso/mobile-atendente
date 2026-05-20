@@ -1,7 +1,24 @@
-import { Stack } from "expo-router";
+import { useAuth } from "@/contexts/AuthContext";
+import { Stack, useRouter } from "expo-router";
+import { useEffect } from "react";
 
 export default function AuthenticatedLayout() {
-  <Stack>
-    <Stack.Screen name="dashboard" />
-  </Stack>;
+  const { loading, signed } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !signed) {
+      router.replace("/login");
+    }
+  }, [loading, signed]);
+
+  if (loading || !signed) {
+    return null;
+  }
+
+  return (
+    <Stack>
+      <Stack.Screen name="dashboard" />
+    </Stack>
+  );
 }

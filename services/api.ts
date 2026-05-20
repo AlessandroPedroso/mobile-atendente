@@ -32,8 +32,7 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      await AsyncStorage.removeItem("@token:pizzaria");
-      // Aqui você pode adicionar lógica para redirecionar o usuário para a tela de login, se necessário
+      await AsyncStorage.multiRemove(["@token:pizzaria", "@user:pizzaria"]);
       router.replace("/login");
     }
 
