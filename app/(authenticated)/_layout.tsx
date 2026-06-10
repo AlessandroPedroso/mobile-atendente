@@ -1,3 +1,4 @@
+import { colors } from "@/constants/theme";
 import { useAuth } from "@/contexts/AuthContext";
 import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
@@ -17,8 +18,19 @@ export default function AuthenticatedLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="dashboard" />
+    <Stack
+      screenOptions={{
+        headerShown: true,
+        headerStyle: { backgroundColor: colors.background },
+        headerTintColor: colors.primary,
+        headerTitleStyle: {
+          fontWeight: "600",
+        },
+        headerShadowVisible: true,
+      }}
+    >
+      <Stack.Screen name="dashboard" options={{ headerShown: false }} />
+      <Stack.Screen name="order" options={{ headerShown: false }} />
     </Stack>
   );
 }

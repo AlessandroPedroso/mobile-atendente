@@ -21,6 +21,16 @@ export interface Category {
   created_at?: string;
 }
 
+export interface Order {
+  id: string;
+  table: number;
+  status: boolean;
+  draft: boolean;
+  name?: string | null;
+  created_at: string;
+  items?: Item[];
+}
+
 export interface Product {
   id: string;
   name: string;
