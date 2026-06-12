@@ -122,6 +122,16 @@ export default function Order() {
     }
   }
 
+  function handleAdvance() {
+    if (items.length === 0) {
+      return;
+    }
+    router.push({
+      pathname: "/(authenticated)/finish",
+      params: { order_id: order_id, table: table },
+    });
+  }
+
   if (loadingCategories) {
     return (
       <View style={styles.loadingContainer}>
@@ -141,7 +151,10 @@ export default function Order() {
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.scrollContent}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 54 }}
+      >
         <Select
           label="Categorias"
           placeholder="Selecione uma categoria"
@@ -206,6 +219,12 @@ export default function Order() {
             ))}
           </View>
         )}
+
+        {items.length > 0 && (
+          <View style={styles.footer}>
+            <Button title="Avançar" onPress={handleAdvance} />
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -245,7 +264,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   scrollContent: {
-    flexGrow: 1,
     padding: spacing.lg,
     gap: 14,
   },
@@ -268,5 +286,8 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: fontSize.lg,
     fontWeight: "bold",
+  },
+  footer: {
+    paddingTop: 24,
   },
 });

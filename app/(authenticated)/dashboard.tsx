@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { borderRadius, colors, fontSize, spacing } from "@/constants/theme";
+import { useAuth } from "@/contexts/AuthContext";
 import api from "@/services/api";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -19,6 +20,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Order } from "../../types";
 
 export default function Dashboard() {
+  const { signOut } = useAuth();
   const insets = useSafeAreaInsets();
   const [tableNumber, setTableNumber] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,7 +74,7 @@ export default function Dashboard() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={[styles.header, { paddingTop: insets.top + 24 }]}>
-            <TouchableOpacity style={styles.signoutButton}>
+            <TouchableOpacity style={styles.signoutButton} onPress={signOut}>
               <Text style={styles.signoutText}>Sair</Text>
             </TouchableOpacity>
           </View>
